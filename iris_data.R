@@ -1,5 +1,10 @@
-#±âÁ¸¿¡ ÀÖ´Â irisµ¥ÀÌÅÍ È®ÀÎÇÏ±â
+#ê¸°ì¡´ì— ìˆëŠ” irisë°ì´í„° í™•ì¸í•˜ê¸°
 head(iris)
 str(iris)
-#3Â÷¿øÇü irisµ¥ÀÌÅÍ È®ÀÎÇÏ±â
+summary(iris)
+
+#3ì°¨ì›í˜• irisë°ì´í„° í™•ì¸í•˜ê¸°
 iris3
+head(iris3)
+str(iris3)
+summary(iris3)
