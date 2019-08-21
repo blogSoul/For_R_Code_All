@@ -47,31 +47,32 @@ p
 
 
 # iris 데이터 분석
-# 데이터 확인
-# View(iris)
-table(is.na(iris))
-
-plot(iris[,1:4],col = iris$Species)
-
 # trainset, testset 분리 : 7 : 3 으로 분리
 idx <- sample(c('train','test'),nrow(iris),replace = TRUE, prob = c(0.7,0.3))
 iris_train <- iris[idx == 'train',]
 iris_test <- iris[idx == 'test',]
 
+# train 데이터의 종속변수 y, 독립변수 x 설정
 iris_train_x <- iris_train[,1:4]
 iris_train_y <- iris_train[,5]
 
+# test 데이터의 종속변수 y, 독립변수 x 설정
 iris_test_x <- iris_test[,1:4]
 iris_test_y <- iris_test[,5]
 
 
 # decision tree model
+# train 데이터로 tree 모델을 적합시켜 iris_treemodel에 저장
 iris_treemodel <- tree(iris_train$Species ~., data = iris_train)
+# 적합시킨 tree 모델로 test데이터 예측하여 predict_tree에 저장
 predict_tree <- predict(iris_treemodel, iris_test, type = 'class')
+# 실제 값 iris_test_y와 예측 값 predict_tree 비교 및 accuracy 측정
 table(iris_test_y, predict_tree)
 mean(iris_test_y == predict_tree)
+# tree 모델 그래프
 plot(iris_treemodel)
 text(iris_treemodel)
+
 plot(iris_test_x, col = iris_test_y)
 plot(iris_test_x, col = predict_tree)
 
@@ -82,10 +83,6 @@ plot(iris_test_x, col = predict_tree)
 iris_scale <- as.data.frame(scale(iris[,1:4]))
 iris_scale$Species <- iris$Species
 
-
-
-
-# idx <- sample(c('train','test'),nrow(iris),replace = TRUE, prob = c(0.7,0.3))
 iris_scale_train <- iris_scale[idx == 'train',]
 iris_scale_test <- iris_scale[idx == 'test',]
 
@@ -96,23 +93,27 @@ iris_scale_test_x <- iris_scale_test[,1:4]
 iris_scale_test_y <- iris_scale_test[,5]
 
 
-
-# knn model
-predict_knn <- knn(train = iris_scale_train_x, test = iris_scale_test_x, cl = iris_scale_train_y, k = 3)
-table(iris_scale_test_y, predict_knn)
-mean(iris_scale_test_y == predict_knn)
-plot(iris_scale_test_x, col = iris_scale_test_y)
-plot(iris_scale_test_x, col = predict_knn)
-
-
 # multinomial logistic model
+# train 데이터로 multinomial logistic 모델을 적합시켜 iris_multinom에 저장
 iris_multinom <- multinom(iris_scale_train$Species ~., data = iris_scale_train)
+# 적합시킨 tree 모델로 test데이터 예측하여 predict_multinom에 저장
 predict_multinom <- predict(iris_multinom, iris_scale_test, type = 'class')
+# 실제 값 iris_test_y와 예측 값 predict_multinom 비교 및 accuracy 측정
 table(iris_scale_test_y, predict_multinom)
 mean(iris_scale_test_y == predict_multinom)
 plot(iris_scale_test_x, col = iris_scale_test_y)
 plot(iris_scale_test_x, col = predict_multinom)
 
+
+
+# knn model
+# train 데이터로 tree 모델을 적합시켜 예측한 값을 predict_knn에 저장
+predict_knn <- knn(train = iris_scale_train_x, test = iris_scale_test_x, cl = iris_scale_train_y, k = 3)
+# 실제 값 iris_scale_test_y와 예측 값 predict_knn 비교 및 accuracy 측정
+table(iris_scale_test_y, predict_knn)
+mean(iris_scale_test_y == predict_knn)
+plot(iris_scale_test_x, col = iris_scale_test_y)
+plot(iris_scale_test_x, col = predict_knn)
 
 
 
