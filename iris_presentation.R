@@ -115,3 +115,6 @@ mean(iris_scale_test_y == predict_multinom)
 # test모델과 Multinomial logistic model(다항 로지스틱 회귀분석)에 적용시킨 모델을 비교해봅니다.
 plot(iris_scale_test_x, col = iris_scale_test_y)
 plot(iris_scale_test_x, col = predict_multinom)
+
+my_locale <- Sys.getlocale("LC_ALL")
+Sys.setlocale("LC_ALL", my_locale)
