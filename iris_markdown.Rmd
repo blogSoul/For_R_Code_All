@@ -48,7 +48,7 @@ library(nnet)
 library(ggplot2)
 set.seed(999)
 ```
-
+***
 * iris 데이터 설명한 링크입니다.
   - https://thebook.io/006723/ch04/01/
 
@@ -70,6 +70,8 @@ plot(iris[,1:4],col=iris$Species)
 summary(iris)
 View(iris)
 ```
+
+***
 
 * 데이터의 시각화를 위해서 값들을 범주형으로 변경했습니다.
 ```{r}
@@ -102,7 +104,7 @@ p
 
 결과 :  모든 feature가 y값에 중요한 것으로 판단됩니다.
 
-
+***
 
 * 다른 분석기법을 적용하기 위해 trainset를 설정합니다.
 * testset 분리 비율은 7 : 3 으로 했습니다. 데이터가 150개 밖에 되지 않아 조금 비율을 많이 설정했습니다.
@@ -130,6 +132,8 @@ mean(iris_test_y == predict_tree)
 plot(iris_treemodel)
 text(iris_treemodel)
 ```
+
+
 * test모델과 Decision tree model에 적용시킨 모델을 비교해봅니다.
 ```{r}
 plot(iris_test_x, col = iris_test_y)
@@ -137,6 +141,8 @@ plot(iris_test_x, col = iris_test_y)
 ```{r}
 plot(iris_test_x, col = predict_tree)
 ```
+
+***
 
 * iris 데이터를 정규화시킵니다.
 ```{r}
@@ -170,6 +176,8 @@ plot(iris_scale_test_x, col = iris_scale_test_y)
 ```{r}
 plot(iris_scale_test_x, col = predict_knn)
 ```
+
+***
 
 *  Multinomial logistic model(다항 로지스틱 회귀분석)기법을 적용시킵니다.
 ```{r}
